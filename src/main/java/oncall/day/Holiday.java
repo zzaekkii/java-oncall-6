@@ -1,4 +1,4 @@
-package oncall;
+package oncall.day;
 
 public enum Holiday {
     SINJEONG(1, 1, "신정"),

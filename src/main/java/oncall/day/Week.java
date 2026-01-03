@@ -1,4 +1,4 @@
-package oncall;
+package oncall.day;
 
 public enum Week {
     MON(false),
