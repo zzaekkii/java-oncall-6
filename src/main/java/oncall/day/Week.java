@@ -42,4 +42,8 @@ public enum Week {
         }
         throw new IllegalArgumentException("요일 계산 중 요류가 발생했습니다.");
     }
+
+    public String getLabel() {
+        return label;
+    }
 }

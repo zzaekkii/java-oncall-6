@@ -22,11 +22,7 @@ public class OncallController {
     public void run() {
         Oncalls oncalls = makeOncalls();
         List<Oncall> oncallSchedule = oncalls.makeSchedule();
-    }
-
-    private Oncalls makeOncalls() {
-        OncallMonth oncallMonth = requestOncallMonth();
-        return requestOncallOrder(oncallMonth);
+        showOncallSchdule(oncallSchedule);
     }
 
     private OncallMonth requestOncallMonth() {
@@ -75,5 +71,14 @@ public class OncallController {
                 outputView.printErrorMessage(e.getMessage());
             }
         }
+    }
+
+    private Oncalls makeOncalls() {
+        OncallMonth oncallMonth = requestOncallMonth();
+        return requestOncallOrder(oncallMonth);
+    }
+
+    private void showOncallSchdule(List<Oncall> oncallSchedule) {
+        outputView.printResult(oncallSchedule);
     }
 }

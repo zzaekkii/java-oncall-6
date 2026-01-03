@@ -12,7 +12,23 @@ public class Day {
         this.week = week;
     }
 
+    public boolean isWeekday() {
+        return !week.isWeekend();
+    }
+
     public boolean isHoliday() {
         return week.isWeekend() || Holiday.isHoliday(month.getMonth(), day);
+    }
+
+    public Month getMonth() {
+        return month;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public Week getWeek() {
+        return week;
     }
 }
