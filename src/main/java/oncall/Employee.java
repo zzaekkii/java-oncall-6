@@ -1,4 +1,6 @@
 package oncall;
 
-public record Employee() {
+public record Employee(
+    String name
+) {
 }
