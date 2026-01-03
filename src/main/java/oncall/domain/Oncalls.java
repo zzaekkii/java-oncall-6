@@ -34,20 +34,24 @@ public class Oncalls {
         return schedule;
     }
 
-    private void makeOncall(Day day, OncallOrder weekdayOncallOrder) {
-        Employee employee = weekdayOncallOrder.foundNextEmployee();
+    private void makeOncall(Day day, OncallOrder oncallOrder) {
+        Employee employee = oncallOrder.foundNextEmployee();
 
         if (schedule.isEmpty()) {
-            weekdayOncallOrder.canWork();
+            oncallOrder.canWork();
             schedule.add(new Oncall(day, employee));
             return;
         }
 
         Employee prevEmployee = schedule.get(schedule.size() - 1).employee();
         if (prevEmployee.equals(employee)) {
-            weekdayOncallOrder.isContinuous();
-            schedule.add(new Oncall(day, weekdayOncallOrder.foundNextEmployee()));
+            oncallOrder.isContinuous();
+            schedule.add(new Oncall(day, oncallOrder.foundNextEmployee()));
+            return;
         }
+
+        oncallOrder.canWork();
+        schedule.add(new Oncall(day, employee));
     }
 
     private List<Day> getDays(OncallMonth oncallMonth) {
