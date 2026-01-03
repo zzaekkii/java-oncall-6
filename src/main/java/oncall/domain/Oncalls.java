@@ -9,22 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Oncalls {
+
     private final OncallMonth oncallMonth;
     private final OncallOrder weekdayOncallOrder;
     private final OncallOrder holidayOncallOrder;
     private final List<Day> days;
     private List<Oncall> schedule;
 
-    public Oncalls(OncallMonth oncallMonth, OncallOrder weekdayOncallOrder, OncallOrder holidayOncallOrder) {
+    public Oncalls(OncallMonth oncallMonth, OncallOrder weekOrder, OncallOrder holidayOrder) {
         this.oncallMonth = oncallMonth;
-        this.weekdayOncallOrder = weekdayOncallOrder;
-        this.holidayOncallOrder = holidayOncallOrder;
+        this.weekdayOncallOrder = weekOrder;
+        this.holidayOncallOrder = holidayOrder;
         this.days = getDays(oncallMonth);
-    }
-    public static Oncalls fromOncallsInfo(OncallMonth oncallMonth, OncallOrder weekdayOncallOrder, OncallOrder holidayOncallOrder) {
-        if(weekdayOncallOrder)
-
-        return new Oncalls(oncallMonth, weekdayOncallOrder, holidayOncallOrder);
     }
 
 //    public List<Oncall> makeSchedule() {

@@ -10,4 +10,12 @@ public class OutputView {
     public void printErrorMessage(String message) {
         System.out.println(ERROR_MESSAGE_PREFIX + message);
     }
+
+    public void printWeekDayOncallOrderRequest() {
+        System.out.print("평일 비상 근무 순번대로 사원 닉네임을 입력하세요> ");
+    }
+
+    public void printHoliDayOncallOrderRequest() {
+        System.out.println("휴일 비상 근무 순번대로 사원 닉네임을 입력하세요> ");
+    }
 }

@@ -25,18 +25,6 @@ public class OncallController {
         return requestOncallOrder(oncallMonth);
     }
 
-    private Oncalls requestOncallOrder(OncallMonth oncallMonth) {
-        while (true) {
-            try {
-                OncallOrder weekDayOncallOrder = requestWeekDayOncallOrder();
-                OncallOrder holidayOncallOrder = requestHolidayOncallOrder();
-                return new Oncalls.fromOncallsInfo(oncallMonth, weekDayOncallOrder, holidayOncallOrder);
-            } catch (IllegalArgumentException e) {
-                outputView.printErrorMessage(e.getMessage());
-            }
-        }
-    }
-
     private OncallMonth requestOncallMonth() {
         while (true) {
             outputView.printMonthAndFirstDayRequest();
@@ -49,12 +37,24 @@ public class OncallController {
         }
     }
 
+    private Oncalls requestOncallOrder(OncallMonth oncallMonth) {
+        while (true) {
+            try {
+                OncallOrder weekDayOncallOrder = requestWeekDayOncallOrder();
+                OncallOrder holidayOncallOrder = requestHolidayOncallOrder();
+                return new Oncalls(oncallMonth, weekDayOncallOrder, holidayOncallOrder);
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e.getMessage());
+            }
+        }
+    }
+
     private OncallOrder requestWeekDayOncallOrder() {
         while (true) {
-            outputView.printMonthAndFirstDayRequest();
+            outputView.printWeekDayOncallOrderRequest();
 
             try {
-                return inputView.readWee
+                return inputView.readOncallOrder();
             } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e.getMessage());
             }
@@ -63,10 +63,10 @@ public class OncallController {
 
     private OncallOrder requestHolidayOncallOrder() {
         while (true) {
-            outputView.printMonthAndFirstDayRequest();
+            outputView.printHoliDayOncallOrderRequest();
 
             try {
-                return inputView.readOncallMonthInfo();
+                return inputView.readOncallOrder();
             } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e.getMessage());
             }

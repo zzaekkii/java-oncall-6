@@ -4,6 +4,11 @@ import camp.nextstep.edu.missionutils.Console;
 import oncall.day.Month;
 import oncall.day.OncallMonth;
 import oncall.day.Week;
+import oncall.domain.Employee;
+import oncall.domain.OncallOrder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class InputView {
     private static final String SEPARATOR = ",";
@@ -18,6 +23,34 @@ public class InputView {
         return separateMonthInfo(input);
     }
 
+    public OncallOrder readOncallOrder() {
+        String input = readLine();
+
+        nullCheck(input);
+
+        input = input.trim();
+
+        return separateEmployee(input);
+    }
+
+    private OncallOrder separateEmployee(String input) {
+        validateSeparatorPattern(input);
+
+        String[] tokens = input.split(SEPARATOR);
+
+        List<Employee> orders = new ArrayList<>();
+        for (String token : tokens) {
+            nullCheck(token);
+            orders.add(Employee.fromString(token));
+        }
+
+        if (orders.stream().distinct().count() != orders.size()) {
+            throw new IllegalArgumentException("중복된 근무자가 입력되었습니다.");
+        }
+
+        return new OncallOrder(orders);
+    }
+
     private OncallMonth separateMonthInfo(String input) {
         validateSeparatorPattern(input);
 
@@ -27,7 +60,15 @@ public class InputView {
             throw new IllegalArgumentException("입력 형식이 올바르지 않습니다.");
         }
 
+        for (String token : tokens) {
+            nullCheck(token);
+        }
+
         Month month = Month.fromMonth(getMonth(tokens[0]));
+
+        if (!tokens[1].matches("^[가-힣]$")) {
+            throw new IllegalArgumentException("요일은 한글을 입력해야 합니다.");
+        }
         Week firstDay = Week.fromString(tokens[1]);
 
         return new OncallMonth(month, firstDay);
