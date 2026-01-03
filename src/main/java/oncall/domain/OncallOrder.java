@@ -11,7 +11,7 @@ public class OncallOrder {
     private static final int MAXIMUM_EMPLOYEES = 35;
 
     private final Deque<Employee> orders;
-    private final Stack<Employee> changeLog;
+    private final Deque<Employee> changeLog;
 
     public OncallOrder(List<Employee> orders) {
         if (orders.size() < MINIMUM_EMPLOYEES || MAXIMUM_EMPLOYEES < orders.size()) {
@@ -19,7 +19,7 @@ public class OncallOrder {
         }
 
         this.orders = new ArrayDeque<>(orders);
-        this.changeLog = new Stack<>();
+        this.changeLog = new ArrayDeque<>();
     }
 
     public void canWork() {
@@ -29,7 +29,7 @@ public class OncallOrder {
         }
 
         while (!changeLog.isEmpty()) {
-            orders.addLast(changeLog.pop());
+            orders.addLast(changeLog.removeFirst());
         }
     }
 
@@ -46,6 +46,6 @@ public class OncallOrder {
             return orders.getFirst();
         }
 
-        return changeLog.peek();
+        return changeLog.getLast();
     }
 }
