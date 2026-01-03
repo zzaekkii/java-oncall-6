@@ -1,26 +1,45 @@
 package oncall.domain;
 
+import oncall.day.Day;
 import oncall.day.Month;
+import oncall.day.OncallMonth;
 import oncall.day.Week;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Oncalls {
-
-    private final Month month;
-    private final Week firstDay;
+    private final OncallMonth oncallMonth;
     private final OncallOrder weekdayOncallOrder;
     private final OncallOrder holidayOncallOrder;
+    private final List<Day> days;
     private List<Oncall> schedule;
 
-    public Oncalls(Month month, Week firstDay, OncallOrder weekdayOncallOrder, OncallOrder holidayOncallOrder) {
-        this.month = month;
-        this.firstDay = firstDay;
+    public Oncalls(OncallMonth oncallMonth, OncallOrder weekdayOncallOrder, OncallOrder holidayOncallOrder) {
+        this.oncallMonth = oncallMonth;
         this.weekdayOncallOrder = weekdayOncallOrder;
         this.holidayOncallOrder = holidayOncallOrder;
+        this.days = getDays(oncallMonth);
+    }
+    public static Oncalls fromOncallsInfo(OncallMonth oncallMonth, OncallOrder weekdayOncallOrder, OncallOrder holidayOncallOrder) {
+        if(weekdayOncallOrder)
+
+        return new Oncalls(oncallMonth, weekdayOncallOrder, holidayOncallOrder);
     }
 
-    public List<Oncall> makeSchedule() {
+//    public List<Oncall> makeSchedule() {
+//
+//    }
 
+    private List<Day> getDays(OncallMonth oncallMonth) {
+        List<Day> makingDays = new ArrayList<>();
+        Month month = oncallMonth.month();
+        Week firstDay = oncallMonth.firstDay();
+
+        for (int day = 1; day <= month.getLastDay(); day++) {
+            makingDays.add(new Day(month, day, firstDay.foundWeekSince(day - 1)));
+        }
+        return makingDays;
     }
+
 }

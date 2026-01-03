@@ -14,12 +14,28 @@ public enum Month {
     NOV(11, 30),
     DEC(12, 31);
 
-    private final int label;
+    private final int month;
     private final int lastDay;
 
-    Month(int label, int lastDay) {
-        this.label = label;
+    Month(int month, int lastDay) {
+        this.month = month;
         this.lastDay = lastDay;
     }
 
+    public static Month fromMonth(int month) {
+        for (Month mon: Month.values()) {
+            if (mon.month == month) {
+                return mon;
+            }
+        }
+        throw new IllegalArgumentException("1부터 12까지의 숫자만 입력해야 합니다.");
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public int getLastDay() {
+        return lastDay;
+    }
 }

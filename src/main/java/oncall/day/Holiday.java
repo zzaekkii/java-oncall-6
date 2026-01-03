@@ -20,7 +20,7 @@ public enum Holiday {
         this.label = label;
     }
 
-    public boolean isHoliday(int month, int day) {
+    public static boolean isHoliday(int month, int day) {
         for (Holiday holiday: Holiday.values()) {
             if (holiday.month == month && holiday.day == day) {
                 return true;
