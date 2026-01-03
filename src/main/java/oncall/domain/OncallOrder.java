@@ -14,7 +14,7 @@ public class OncallOrder {
     private final Stack<Employee> changeLog;
 
     public OncallOrder(List<Employee> orders) {
-        if(orders.size() < MINIMUM_EMPLOYEES || MAXIMUM_EMPLOYEES < orders.size()) {
+        if (orders.size() < MINIMUM_EMPLOYEES || MAXIMUM_EMPLOYEES < orders.size()) {
             throw new IllegalArgumentException("근무자는 5명 이상, 35명 이하여야 합니다.");
         }
 

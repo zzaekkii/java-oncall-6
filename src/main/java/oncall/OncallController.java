@@ -1,10 +1,13 @@
 package oncall;
 
 import oncall.day.OncallMonth;
+import oncall.domain.Oncall;
 import oncall.domain.OncallOrder;
 import oncall.domain.Oncalls;
 import oncall.view.InputView;
 import oncall.view.OutputView;
+
+import java.util.List;
 
 public class OncallController {
 
@@ -18,6 +21,7 @@ public class OncallController {
 
     public void run() {
         Oncalls oncalls = makeOncalls();
+        List<Oncall> oncallSchedule = oncalls.makeSchedule();
     }
 
     private Oncalls makeOncalls() {

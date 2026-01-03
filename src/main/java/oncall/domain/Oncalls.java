@@ -9,23 +9,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Oncalls {
-
-    private final OncallMonth oncallMonth;
     private final OncallOrder weekdayOncallOrder;
     private final OncallOrder holidayOncallOrder;
     private final List<Day> days;
-    private List<Oncall> schedule;
+    private final List<Oncall> schedule;
 
     public Oncalls(OncallMonth oncallMonth, OncallOrder weekOrder, OncallOrder holidayOrder) {
-        this.oncallMonth = oncallMonth;
         this.weekdayOncallOrder = weekOrder;
         this.holidayOncallOrder = holidayOrder;
         this.days = getDays(oncallMonth);
+        schedule = new ArrayList<>();
     }
 
-//    public List<Oncall> makeSchedule() {
-//
-//    }
+    public List<Oncall> makeSchedule() {
+        for (Day day : days) {
+            if (day.isHoliday()) {
+                makeOncall(day, holidayOncallOrder);
+                continue;
+            }
+
+            makeOncall(day, weekdayOncallOrder);
+        }
+
+        return schedule;
+    }
+
+    private void makeOncall(Day day, OncallOrder weekdayOncallOrder) {
+        Employee employee = weekdayOncallOrder.foundNextEmployee();
+
+        if (schedule.isEmpty()) {
+            weekdayOncallOrder.canWork();
+            schedule.add(new Oncall(day, employee));
+            return;
+        }
+
+        Employee prevEmployee = schedule.get(schedule.size() - 1).employee();
+        if (prevEmployee.equals(employee)) {
+            weekdayOncallOrder.isContinuous();
+            schedule.add(new Oncall(day, weekdayOncallOrder.foundNextEmployee()));
+        }
+    }
 
     private List<Day> getDays(OncallMonth oncallMonth) {
         List<Day> makingDays = new ArrayList<>();

@@ -71,12 +71,12 @@
 ## 2. 근무표 생성
 ### a.`Oncalls`의 달`Month`와 시작요일`Week`에 맞게 반복
 ### b. 어제 근무를 섰던 `Employee`라면 `Oncall` 생성 불가
-- [ ] 오늘 날짜의 특성 근무 순번 `Deque`의 head
+- [x] 오늘 날짜의 특성 근무 순번 `Deque`의 head
 ### c. 근무가 연속되어 다음 근무자와 변경
-- [ ] `Deque`의 head가 어제 근무 섰다면, head의 바로 다음 순번을 투입
-- [ ] `Stack`에 바꿔준 다음 순번 `Employee`와 연속 근무라 못 서는 `Employee` 순서대로 추가
-- [ ] `Stack`이 비어있다면, `Deque` 가장 상단의 현재 근무 투입하는 `Employee`를 빼고 뒤로 추가함
-- [ ] `Stack`에 들어있다면, 가장 앞 `Employee`를 근무 투입하고, pop한 순서대로 `Employee`들을 `Deque`뒤에 추가
+- [x] `Deque`의 head가 어제 근무 섰다면, head의 바로 다음 순번을 투입
+- [x] `Stack`에 바꿔준 다음 순번 `Employee`와 연속 근무라 못 서는 `Employee` 순서대로 추가
+- [x] `Stack`이 비어있다면, `Deque` 가장 상단의 현재 근무 투입하는 `Employee`를 빼고 뒤로 추가함
+- [x] `Stack`에 들어있다면, 가장 앞 `Employee`를 근무 투입하고, pop한 순서대로 `Employee`들을 `Deque`뒤에 추가
 ## 3. 근무표 출력
 ### a. 빈 줄 출력
 - [ ] 결과 출력 전 빈 줄 한 줄 출력
