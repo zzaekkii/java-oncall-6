@@ -13,4 +13,8 @@ public class Day {
         this.week = week;
         this.isHoliday = isHoliday;
     }
+
+    public boolean isHoliday() {
+        return week.isWeekend() || isHoliday;
+    }
 }

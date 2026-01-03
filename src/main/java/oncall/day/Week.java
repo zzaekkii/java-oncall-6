@@ -14,4 +14,8 @@ public enum Week {
     Week(boolean isWeekend) {
         this.isWeekend = isWeekend;
     }
+
+    public boolean isWeekend() {
+        return isWeekend;
+    }
 }

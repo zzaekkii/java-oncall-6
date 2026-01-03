@@ -1,4 +1,9 @@
 package oncall.domain;
 
-public class Oncall {
+import oncall.day.Day;
+
+public record Oncall(
+    Day day,
+    Employee employee
+) {
 }
